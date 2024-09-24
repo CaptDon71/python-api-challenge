@@ -7,7 +7,7 @@
 # 
 # ## Starter Code to Generate Random Geographic Coordinates and a List of Cities
 
-# In[12]:
+# In[2]:
 
 
 # Dependencies and Setup
@@ -27,7 +27,7 @@ from citipy import citipy
 
 # ### Generate the Cities List by Using the `citipy` Library
 
-# In[13]:
+# In[3]:
 
 
 # Empty list for holding the latitude and longitude combinations
@@ -63,7 +63,7 @@ print(f"Number of cities in the list: {len(cities)}")
 # 
 # ### Use the OpenWeatherMap API to retrieve weather data from the cities list generated in the started code
 
-# In[14]:
+# In[4]:
 
 
 # Set the API base URL
@@ -146,7 +146,7 @@ print("Data Retrieval Complete      ")
 print("-----------------------------")
 
 
-# In[15]:
+# In[5]:
 
 
 # Convert the cities weather data into a Pandas DataFrame
@@ -156,21 +156,21 @@ city_data_df = pd.DataFrame(city_data)
 city_data_df.count()
 
 
-# In[16]:
+# In[6]:
 
 
 # Display sample data
 city_data_df.head()
 
 
-# In[17]:
+# In[7]:
 
 
 # Export the City_Data into a csv
 city_data_df.to_csv("output_data/cities.csv", index_label="City_ID")
 
 
-# In[19]:
+# In[8]:
 
 
 # Read saved data
@@ -184,14 +184,14 @@ city_data_df.head()
 # 
 # #### Latitude Vs. Temperature
 
-# In[25]:
+# In[10]:
 
 
 # Build scatter plot for latitude vs. temperature
 plt.scatter(city_data_df['Lat'], city_data_df['Max Temp'], edgecolor='black', marker='o')
 
 # Incorporate the other graph properties
-plt.title('City Max Latitude vs. Temperature (2024-09-23)')
+plt.title('City Max Latitude vs. Temperature (2024-09-24)')
 plt.xlabel('Latitude')
 plt.ylabel('Max Temperature (C)')
 plt.grid()
@@ -206,14 +206,14 @@ plt.show()
 
 # #### Latitude Vs. Humidity
 
-# In[24]:
+# In[11]:
 
 
 # Build the scatter plots for latitude vs. humidity
 plt.scatter(city_data_df['Lat'], city_data_df['Humidity'], edgecolor='black', marker='o')
 
 # Incorporate the other graph properties
-plt.title('City Max Latitude vs. Humidity (2024-09-23)')
+plt.title('City Max Latitude vs. Humidity (2024-09-24)')
 plt.xlabel('Latitude')
 plt.ylabel('Humidity (%)')
 plt.grid()
@@ -228,14 +228,14 @@ plt.show()
 
 # #### Latitude Vs. Cloudiness
 
-# In[23]:
+# In[13]:
 
 
 # Build the scatter plots for latitude vs. cloudiness
 plt.scatter(city_data_df['Lat'], city_data_df['Cloudiness'], edgecolor='black', marker='o')
 
 # Incorporate the other graph properties
-plt.title('City Max Latitude vs. Cloudiness (2024-09-23)')
+plt.title('City Max Latitude vs. Cloudiness (2024-09-24)')
 plt.xlabel('Latitude')
 plt.ylabel('Cloudiness (%)')
 plt.grid()
@@ -250,14 +250,14 @@ plt.show()
 
 # #### Latitude vs. Wind Speed Plot
 
-# In[28]:
+# In[14]:
 
 
 # Build the scatter plots for latitude vs. wind speed
 plt.scatter(city_data_df['Lat'], city_data_df['Wind Speed'], edgecolor='black', marker='o')
 
 # Incorporate the other graph properties
-plt.title('City Max Latitude vs. Wind Speed (2024-09-23)')
+plt.title('City Max Latitude vs. Wind Speed (2024-09-24)')
 plt.xlabel('Latitude')
 plt.ylabel('Wind Speed (m/s)')
 plt.grid()
@@ -275,13 +275,15 @@ plt.show()
 # ## Requirement 2: Compute Linear Regression for Each Relationship
 # 
 
-# In[211]:
+# In[16]:
 
 
 # Define a function to create Linear Regression plots
 def create_linear_regression_plot(x, y, ann_x, ann_y, x_label='X-axis', y_label='Y-axis', title='Linear Regression Plot'):
     # Perform linear regression using arguments 
     slope, intercept, r_value, p_value, std_err = linregress(x, y)
+    value = 12345.6789
+    np.set_printoptions(suppress=True)
     print(f'The r^2-value is: {r_value**2}')
     # Calculate predicted y values
     y_pred = slope * np.array(x) + intercept
@@ -304,7 +306,7 @@ def create_linear_regression_plot(x, y, ann_x, ann_y, x_label='X-axis', y_label=
     plt.show()
 
 
-# In[212]:
+# In[17]:
 
 
 # Create a DataFrame with the Northern Hemisphere data (Latitude >= 0)
@@ -314,7 +316,7 @@ northern_hemi_df = city_data_df[city_data_df['Lat'] >= 0]
 northern_hemi_df.head()
 
 
-# In[213]:
+# In[18]:
 
 
 # Create a DataFrame with the Southern Hemisphere data (Latitude < 0)
@@ -327,7 +329,7 @@ southern_hemi_df.head()
 
 # ###  Temperature vs. Latitude Linear Regression Plot
 
-# In[214]:
+# In[19]:
 
 
 # Linear regression on Northern Hemisphere
@@ -342,7 +344,7 @@ create_linear_regression_plot(
 )
 
 
-# In[215]:
+# In[20]:
 
 
 # Linear regression on Southern Hemisphere
@@ -361,7 +363,7 @@ create_linear_regression_plot(
 
 # ### Humidity vs. Latitude Linear Regression Plot
 
-# In[216]:
+# In[21]:
 
 
 # Northern Hemisphere
@@ -376,7 +378,7 @@ create_linear_regression_plot(
 )
 
 
-# In[217]:
+# In[22]:
 
 
 # Southern Hemisphere
@@ -395,7 +397,7 @@ create_linear_regression_plot(
 
 # ### Cloudiness vs. Latitude Linear Regression Plot
 
-# In[218]:
+# In[23]:
 
 
 # Northern Hemisphere
@@ -429,7 +431,7 @@ create_linear_regression_plot(
 
 # ### Wind Speed vs. Latitude Linear Regression Plot
 
-# In[228]:
+# In[24]:
 
 
 # Northern Hemisphere
@@ -444,7 +446,7 @@ create_linear_regression_plot(
 )
 
 
-# In[229]:
+# In[25]:
 
 
 # Southern Hemisphere
@@ -460,9 +462,3 @@ create_linear_regression_plot(
 
 
 # **Discussion about the linear relationship:** Global atmospheric circulation does create some regional wind patterns based on latitude, the relationship between wind speed and latitude is weak due to the strong influence of other factors. 
-
-# In[ ]:
-
-
-
-
